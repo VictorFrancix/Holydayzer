@@ -36,3 +36,14 @@ app.get("/is-today-holiday", (req, res) => {
     });
     res.send(isHoliday);
     });
+
+app.get('/holidays/:monthNumber', (req, res) => {
+    let monthNumber = req.params.monthNumber;
+    let array_holidays_month = [];
+    holidays.forEach(holiday => {
+        if (holiday.date.slice(0,2) === monthNumber) {
+            array_holidays_month.push(holiday);
+        }
+    });
+    res.send(array_holidays_month);
+});
