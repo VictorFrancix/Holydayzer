@@ -1,6 +1,9 @@
 import express from 'express';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
 
 const holidays = [
     { date: "1/1/2022", name: "Confraternização mundial" },
@@ -19,3 +22,17 @@ const holidays = [
 app.get("/holidays", (req, res) => {
     res.send(holidays);});
 
+app.get("/is-today-holiday", (req, res) => {
+    let today = new Date();
+    today = today.toLocaleDateString('en-US');
+    let isHoliday;
+    holidays.forEach(holiday => {
+        if (holiday.date === today) {
+            isHoliday = `Sim, hoje é ${holiday.name}`;
+        }
+        else{
+            isHoliday = 'Não, hoje não é feriado';
+        }
+    });
+    res.send(isHoliday);
+    });
