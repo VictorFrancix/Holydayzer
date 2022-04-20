@@ -1,9 +1,9 @@
-import express from 'express';
-import cors from 'cors';
+import express from "express";
+import cors from "cors";
 
 const app = express();
 
-app.use(cors());
+app.use(cors());    
 
 const holidays = [
     { date: "1/1/2022", name: "Confraternização mundial" },
@@ -41,7 +41,8 @@ app.get('/holidays/:monthNumber', (req, res) => {
     let monthNumber = req.params.monthNumber;
     let array_holidays_month = [];
     holidays.forEach(holiday => {
-        if (holiday.date.slice(0,2) === monthNumber) {
+
+        if (holiday.date.split("/")[0] === monthNumber) {
             array_holidays_month.push(holiday);
         }
     });
